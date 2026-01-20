@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'Interceptor_ErrorHandling';
+  private http = inject(HttpClient);
+
+  triggerError() {
+    console.log('Triggering 404 error...');
+    this.http.get('https://jsonplaceholder.typicode.com/nonexistent-endpoint').subscribe();
+  }
 }
